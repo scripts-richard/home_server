@@ -1,0 +1,37 @@
+body {
+  margin: 3%;
+  background-image: url("pine64_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+#mainpwr,
+#apply-btn {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 3vh;
+}
+
+.RC .slider-selection {background: #FF8282;}
+
+.RC .slider-handle {background: red;}
+
+.GC .slider-selection {background: #428041;}
+
+.GC .slider-handle {background: green;}
+
+.BC .slider-selection {background: #8283FF;}
+
+.BC .slider-handle {background: blue;}
+
+.R, .G, .B {width: 300px;}
+
+.panel {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#apply {margin: auto;}
+ h1 {color: white;}

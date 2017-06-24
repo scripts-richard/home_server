@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Hue Control Center</h1>
+</div>
+  <button type="button" class="btn btn-default btn-lg btn-block {% if on %}active{% endif %}" id="mainpwr" onclick="toggle_all({{ count }});"><span class="glyphicon glyphicon-off"></span></button>
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {% for light in lights %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <button type="button" class="btn btn-default btn-lg {% if lights[light]['state']['on'] %} active {% endif %}" id="pwr{{ light }}" onclick="toggle({{ light }});"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+          {{ lights[light]['name'] }}
+        </div>
+        <div class="panel-body">
+          <p class="RC">
+            <span class="label label-default">R</span> <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="254" data-slider-step="1" data-slider-value="{{ colors[light]['r'] }}" data-slider-id="RC{{ light }}" id="R{{ light }}" data-slider-tooltip="hide" data-slider-handle="round" name="r{{ light }}" />
+          </p>
+          <p class="GC">
+            <span class="label label-default">G</span> <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="254" data-slider-step="1" data-slider-value="{{ colors[light]['g'] }}" data-slider-id="GC{{ light }}" id="G{{ light }}" data-slider-tooltip="hide" data-slider-handle="round" name="g{{ light }}" />
+          </p>
+          <p class="BC">
+            <span class="label label-default">B</span> <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="254" data-slider-step="1" data-slider-value="{{ colors[light]['b'] }}" data-slider-id="BC{{ light }}" id="B{{ light }}" data-slider-tooltip="hide" data-slider-handle="round" name="b{{ light }}" />
+          </p>
+
+          <div id="RGB{{ light }}" class="well" style="background: rgb({{ colors[light]['r'] }}, {{ colors[light]['g'] }}, {{ colors[light]['b'] }})"></div>
+
+          <p>
+            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="{{ lights[light]['state']['bri'] }}" data-slider-id="BRT{{ light }}" id="BR{{ light }}" data-slider-tooltip="hide" data-slider-handle="round" name="y{{ light }}" />
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+
+    <button class="btn btn-default btn-lg btn-block" type="button" onclick="apply_changes();" id="apply-btn">Apply</button>
+  </form>
+
+  <script type=text/javascript src="{{ url_for('static', filename='third_party/js/jquery-3.2.1.min.js') }}"></script>
+
+  <script type=text/javascript src="{{ url_for('static', filename='third_party/js/bootstrap-slider.js') }}"></script>
+
+  {% block javascript %}
+    <script type=text/javascript>{% include "script.js" %}</script>
+  {% endblock %}
+{% endblock %}
