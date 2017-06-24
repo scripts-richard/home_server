@@ -1,11 +1,10 @@
 import json
 
-import hue
-
 from app import app
 from flask import render_template, request
 from flask_wtf import FlaskForm
 
+from hue import Hue, xy_to_rgb
 from server_settings import NETDATA_PORT, get_ip_address
 
 
@@ -18,24 +17,24 @@ def index():
 
 @app.route('/hue_control', methods=['GET', 'POST'])
 def hue_control():
-    lights = hue.get_lights()
+    myhue = Hue()
     colors = {}
     form = FlaskForm()
     on = False
-    count = len(lights)
+    count = len(myhue.lights)
 
-    for light in lights:
-        x = lights[light]['state']['xy'][0]
-        y = lights[light]['state']['xy'][1]
-        brightness = lights[light]['state']['bri'] / 254
-        r, g, b = hue.xy_to_rgb(x, y, brightness)
+    for light in myhue.lights:
+        x = myhue.lights[light]['state']['xy'][0]
+        y = myhue.lights[light]['state']['xy'][1]
+        brightness = myhue.lights[light]['state']['bri'] / 254
+        r, g, b = xy_to_rgb(x, y, brightness)
         colors[light] = {'r': r, 'g': g, 'b': b}
-        if lights[light]['state']['on']:
+        if myhue.lights[light]['state']['on']:
             on = True
 
     return render_template('hue_control.html',
                            title='Hue Control',
-                           lights=lights,
+                           lights=myhue.lights,
                            colors=colors,
                            form=form,
                            on=on,
@@ -44,13 +43,15 @@ def hue_control():
 
 @app.route('/toggle/<light>', methods=['GET', 'POST'])
 def toggle(light):
-    hue.toggle_light(light)
+    myhue = Hue()
+    myhue.toggle_light(light)
     return json.dumps({'success': True})
 
 
 @app.route('/toggle_all', methods=['GET', 'POST'])
 def toggle_all():
-    hue.toggle_lights()
+    myhue = Hue()
+    myhue.toggle_lights()
     return json.dumps({'success': True})
 
 
@@ -58,6 +59,7 @@ def toggle_all():
 def apply_changes():
     data = request.form
     colors = {}
+    myhue = Hue()
     for key, val in data.items():
         if key != 'csrf_token':
             light_id = key[1]
@@ -65,5 +67,5 @@ def apply_changes():
             if light_id not in colors:
                 colors[light_id] = {}
             colors[light_id][color] = val
-    hue.update_lights_rgb(colors)
+    myhue.update_via_rgb(colors)
     return json.dumps({'success': True})
