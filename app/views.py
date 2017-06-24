@@ -5,14 +5,17 @@ from flask import render_template, request
 from flask_wtf import FlaskForm
 
 from hue import Hue, xy_to_rgb
-from server_settings import NETDATA_PORT, get_ip_address
+from server_settings import get_ip_address, NETDATA_PORT, PLEX_PORT
 
 
 @app.route('/')
 def index():
-    netdata_address = 'http://' + get_ip_address('eth0') + NETDATA_PORT
+    ip = get_ip_address('eth0')
+    netdata_address = 'http://' + ip + NETDATA_PORT
+    plex_address = 'httpP://' + ip + PLEX_PORT + '/manage/index.html'
     return render_template('index.html',
-                           netdata_address=netdata_address)
+                           netdata_address=netdata_address,
+                           plex_address=plex_address)
 
 
 @app.route('/hue_control', methods=['GET', 'POST'])

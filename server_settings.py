@@ -3,6 +3,7 @@ import fcntl
 import struct
 
 NETDATA_PORT = ':19999'
+PLEX_PORT = ':32400'
 
 
 def get_ip_address(ifname):
