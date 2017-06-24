@@ -12,7 +12,7 @@ from server_settings import get_ip_address, NETDATA_PORT, PLEX_PORT
 def index():
     ip = get_ip_address('eth0')
     netdata_address = 'http://' + ip + NETDATA_PORT
-    plex_address = 'httpP://' + ip + PLEX_PORT + '/manage/index.html'
+    plex_address = 'http://' + ip + PLEX_PORT + '/manage/index.html'
     return render_template('index.html',
                            netdata_address=netdata_address,
                            plex_address=plex_address)
