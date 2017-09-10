@@ -72,3 +72,9 @@ def apply_changes():
             colors[light_id][color] = val
     myhue.update_via_rgb(colors)
     return json.dumps({'success': True})
+
+@app.route('/test', methods=['POST'])
+def test_post():
+    data = request.form
+    print(data)
+    return json.dumps({'success': True})
