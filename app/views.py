@@ -73,6 +73,7 @@ def apply_changes():
     myhue.update_via_rgb(colors)
     return json.dumps({'success': True})
 
+
 @app.route('/test', methods=['POST'])
 def test_post():
     data = request.form
