@@ -4,19 +4,34 @@
   <div class="page-header">
     <h1>Pine64</h1>
   </div>
+
     <div class="col-sm-6 col-md-4">
       <a href="{{ url_for('hue_control') }}" class="thumbnail">
         <img src="{{ url_for('static', filename='resources/images/hue_icon.png') }}" alt="Hue Control Center" />
       </a>
     </div>
+
     <div class="col-sm-6 col-md-4">
       <a href="{{ netdata_address }}" class="thumbnail">
         <img src="{{ url_for('static', filename='resources/images/netdata.jpg') }}" alt="NetData DashBoard" />
       </a>
     </div>
+
     <div class="col-sm-6 col-md-4">
       <a href="{{ plex_address }}" class="thumbnail">
         <img src="{{ url_for('static', filename='resources/images/plex_logo.png') }}" alt="Plex Media Server" />
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <a href="{{ pihole_address }}" class="thumbnail">
+        <img src="{{ url_for('static', filename='resources/images/pi-hole.jpg') }}" alt="Pi-Hole" />
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <a href="{{ router_address }}" class="thumbnail">
+        <img src="{{ url_for('static', filename='resources/images/gear.png') }}" alt="Router Settings" />
       </a>
     </div>
 {% endblock %}

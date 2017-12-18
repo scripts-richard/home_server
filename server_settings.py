@@ -4,6 +4,7 @@ import struct
 
 NETDATA_PORT = ':19999'
 PLEX_PORT = ':32400'
+ROUTER_ADDRESS = '192.168.1.254'
 
 
 def get_ip_address(ifname):
