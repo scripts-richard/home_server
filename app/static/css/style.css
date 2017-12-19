@@ -36,6 +36,6 @@ body {
 #apply {margin: auto;}
  h1 {color: white;}
 
-.thumbnail {height: 300px;}
+.thumbnail {max-height: 300px;}
 
 img {max-height: 280px;}
