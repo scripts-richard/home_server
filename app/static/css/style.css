@@ -37,3 +37,5 @@ body {
  h1 {color: white;}
 
 .thumbnail {height: 300px;}
+
+img {max-height: 280px;}
