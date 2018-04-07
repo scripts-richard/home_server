@@ -35,7 +35,12 @@ def hue_control():
         x = myhue.lights[light]['state']['xy'][0]
         y = myhue.lights[light]['state']['xy'][1]
         brightness = myhue.lights[light]['state']['bri'] / 254
-        r, g, b = xy_to_rgb(x, y, brightness)
+
+        if x > 0  and y > 0:
+            r, g, b = xy_to_rgb(x, y, brightness)
+        else:
+            r, g, b = 0, 0, 0
+
         colors[light] = {'r': r, 'g': g, 'b': b}
         if myhue.lights[light]['state']['on']:
             on = True
