@@ -6,7 +6,7 @@ from flask import render_template, request
 from flask_wtf import FlaskForm
 
 from hue import Hue, xy_to_rgb
-from server_settings import get_ip_address, NETDATA_PORT, PLEX_PORT, ROUTER_ADDRESS
+from server_settings import get_ip_address, NETDATA_PORT, PLEX_PORT, ROUTER_ADDRESS, WEATHER_IP
 
 
 @app.route('/')
