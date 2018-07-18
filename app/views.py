@@ -1,4 +1,5 @@
 import json
+import requests
 
 from app import app
 from flask import render_template, request
@@ -52,6 +53,17 @@ def hue_control():
                            form=form,
                            on=on,
                            count=count)
+
+
+@app.route('/weather')
+def weather():
+    url = 'http://' + WEATHER_IP
+    data = json.loads(requests.get(url).content.decode())
+    temperature = data['temperature']
+    humidity = data['humidity']
+    return render_template('weather.html',
+                           temperature=temperature,
+                           humidity=humidity)
 
 
 @app.route('/toggle/<light>', methods=['GET', 'POST'])
