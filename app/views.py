@@ -101,3 +101,9 @@ def test_post():
     data = request.form
     print(data)
     return json.dumps({'success': True})
+
+
+@app.route('/print/<line>')
+def print_line(line):
+    print(line)
+    return json.dumps({'success': True})
